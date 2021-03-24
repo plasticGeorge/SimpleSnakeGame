@@ -5,6 +5,7 @@ using UnityEngine;
 public class Snake : MonoBehaviour
 {
     [SerializeField] private List<Transform> _tails;
+    [SerializeField] private GameObject _foodPrefab;
     [SerializeField] private float _bonesDistance;
     [SerializeField] private GameObject _bonePrefab;
     [Range(0, 30), SerializeField] private float _moveSpeed;
@@ -26,6 +27,10 @@ public class Snake : MonoBehaviour
 
             GameObject bone = Instantiate(_bonePrefab);
             _tails.Add(bone.transform);
+
+            Instantiate(_foodPrefab,
+                        new Vector3(Random.Range(transform.position.x + 3, transform.position.x + 5), 0.3f, Random.Range(transform.position.x + 3, transform.position.x + 5)),
+                        new Quaternion(0, 0, 0, 0));
         }
         else if(other.TryGetComponent(out Food border))
         {
